@@ -1,0 +1,5 @@
+//Giúp lên lịch chạy tự động các tác vụ lặp đi lặp lại theo thời gian cụ thể
+schedule==1.1.0
+
+//Đọc các biến cấu hình từ file .env và tải chúng vào môi trường làm việc của Python giúp tách các thông tin nhạy cảm khỏi code của mình
+python-dotenv==1.0.0
