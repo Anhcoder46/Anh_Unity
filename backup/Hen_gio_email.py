@@ -12,9 +12,6 @@ load_dotenv(dotenv_path="D:\Tu_dong_hoa_python\Bai_tap_chuong3\demo.env")
 sender_email = os.getenv("SENDER_EMAIL")
 sender_password = os.getenv("SENDER_PASSWORD")
 receiver_email = os.getenv("RECEIVER_EMAIL")
-print(f"SENDER_EMAIL: [{sender_email}]")
-print(f"SENDER_PASSWORD: [{sender_password}]")
-print(f"RECEIVER_EMAIL: [{receiver_email}]")
 
 def backup():
     backup = "backup"
