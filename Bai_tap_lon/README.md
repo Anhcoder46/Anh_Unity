@@ -19,8 +19,7 @@ Bat_Dong_San.py là script Python tự động thu thập dữ liệu bất đ�
         schedule
         openpyxl
 Cài đặt các thư viện cần thiết:
-bash
-pip install selenium pandas schedule openpyxl
+    pip install selenium pandas schedule openpyxl
 
 🚀 Hướng dẫn sử dụng
 1. Cài đặt ChromeDriver
@@ -29,8 +28,7 @@ Tải ChromeDriver tương ứng từ trang chủ
 Đặt file chromedriver.exe vào thư mục project hoặc thêm vào PATH hệ thống
 
 2. Chạy script
-bash
-python Bat_Dong_San.py
+    python Bat_Dong_San.py
 
 3. Quy trình hoạt động
 Script sẽ tự động:
@@ -48,28 +46,24 @@ schedule.every().day.at("06:00").do(Lay_Bat_Dong_San)
 
 📊 Cấu trúc dữ liệu đầu ra
 File Excel bao gồm các cột sau:
-    Tên cột	Mô tả	Ví dụ
-    titles	Tiêu đề tin đăng	"Cho thuê mặt bằng Q1"
-    describes	Mô tả chi tiết	"Mặt bằng 50m2, kinh doanh..."
-    prices	Giá	"15 triệu/tháng"
-    acreages	Diện tích	"50 m²"
-    addresss	Địa chỉ	"Quận 1, TP HCM"
-    links	URL bài đăng	"https://homedy.com/..."
+    Tên cột	    Mô tả	                Ví dụ
+    titles	    Tiêu đề tin đăng	    "Cho thuê mặt bằng Q1"
+    describes	Mô tả chi tiết	        "Mặt bằng 50m2, kinh doanh..."
+    prices	    Giá	                    "15 triệu/tháng"
+    acreages	Diện tích	            "50 m²"
+    addresss	Địa chỉ	                "Quận 1, TP HCM"
+    links	    URL bài đăng	        "https://homedy.com/..."
 
 🔧 Tùy chỉnh
-Thay đổi địa điểm: Sửa dòng code sau để chọn thành phố khác
+Thay đổi địa điểm: Sửa dòng code sau để chọn thành phố khác:
+    ho_chi_minh = city_list.find_element(By.XPATH, ".//div[@class='loc-item' and contains(text(),'TP Hồ Chí Minh')]")
 
-python
-ho_chi_minh = city_list.find_element(By.XPATH, ".//div[@class='loc-item' and contains(text(),'TP Hồ Chí Minh')]")
-Thay đổi loại bất động sản: Sửa dòng code sau
+Thay đổi loại bất động sản: Sửa dòng code sau:
+    bat_dong_san_khac = category_list.find_element(By.XPATH, ".//a[contains(text(),'Bất động sản khác')]")
 
-python
-bat_dong_san_khac = category_list.find_element(By.XPATH, ".//a[contains(text(),'Bất động sản khác')]")
-Thay đổi thời gian chờ: Điều chỉnh các tham số
-
-python
-time.sleep(3)  # Giảm nếu mạng nhanh, tăng nếu mạng chậm
-WebDriverWait(driver, 30)  # Thời gian chờ tối đa
+Thay đổi thời gian chờ: Điều chỉnh các tham số:
+    time.sleep(3)  # Giảm nếu mạng nhanh, tăng nếu mạng chậm
+    WebDriverWait(driver, 30)  # Thời gian chờ tối đa
 
 ⚠️ Lưu ý
 Nếu website thay đổi giao diện, cần cập nhật lại các selector trong code
