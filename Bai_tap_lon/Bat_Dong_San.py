@@ -35,14 +35,14 @@ def Lay_Bat_Dong_San():
 
     data = []
     trang = 1
-    max_retries = 3  # Số lần thử lại khi gặp lỗi
+    max_retries = 3
     
     while True:
         #5. Lấy tất cả dữ liệu của các trang.
         print(f"Đang lấy dữ liệu trang {trang}...")
         url = f"https://homedy.com/ban-bat-dong-san-khac-tp-ho-chi-minh/p{trang}"
         driver.get(url)
-        time.sleep(3)  # Chờ trang load
+        time.sleep(3)
         
         try:
             notfound = driver.find_element(By.CSS_SELECTOR, "div.report")
@@ -58,9 +58,7 @@ def Lay_Bat_Dong_San():
             retry_count = 0
             while retry_count < max_retries:
                 try:
-                    # Lấy lại danh sách sau mỗi lần retry để tránh stale element
                     current_bds = driver.find_elements(By.CLASS_NAME, "product-content")[i]
-                    
                     tieude = current_bds.find_element(By.CSS_SELECTOR, "h3 a.title").get_attribute("title").strip()
                     link = current_bds.find_element(By.CSS_SELECTOR, "h3 a.title").get_attribute("href")
                     
@@ -78,8 +76,7 @@ def Lay_Bat_Dong_San():
                         diachi = current_bds.find_element(By.CLASS_NAME, "address").text.strip()
                     except NoSuchElementException:
                         diachi = "Không có thông tin"
-                    
-                    # Mở link trong tab mới để tránh mất danh sách
+
                     driver.execute_script("window.open('');")
                     driver.switch_to.window(driver.window_handles[1])
                     driver.get(link)
@@ -91,11 +88,9 @@ def Lay_Bat_Dong_San():
                         ).text.strip()
                     except:
                         mota = "Không có thông tin"
-                    
-                    # Đóng tab hiện tại và quay lại tab danh sách
+
                     driver.close()
-                    driver.switch_to.window(driver.window_handles[0])
-                    
+                    driver.switch_to.window(driver.window_handles[0])    
                     data.append({
                         "titles": tieude,
                         "describes": mota,
@@ -105,7 +100,7 @@ def Lay_Bat_Dong_San():
                         "links": link
                     })
                     print(f"Tiêu đề: {tieude} - giá: {gia} - địa chỉ: {diachi} - diện tích: {dientich}")
-                    break  # Thoát khỏi vòng lặp retry nếu thành công
+                    break
                     
                 except StaleElementReferenceException:
                     retry_count += 1
@@ -115,10 +110,8 @@ def Lay_Bat_Dong_San():
                         print("Đã thử lại tối đa số lần, bỏ qua tin đăng này")
                 except Exception as e:
                     print("Lỗi khi lấy dữ liệu tin đăng:", e)
-                    break  # Thoát khỏi vòng lặp retry nếu lỗi không phải stale element
-        
-        trang += 1
-    
+                    break
+        trang += 1 
     driver.quit()
     
     #6. Lưu dữ liệu
